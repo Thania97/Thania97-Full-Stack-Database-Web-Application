@@ -1,0 +1,134 @@
+ <!-- 
+  Citation for the following HTML document
+        Date: 02/12/2025
+        Adapted from bsg_HTML_UI example documents:
+        Source URL: https://canvas.oregonstate.edu/courses/1987790/pages/exploration-web-application-technology?module_item_id=25023012
+    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="styles.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { // default to browse view
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body onload="showform('browse')">
+    <h1>Orders Management</h1>
+    <div id="menu">
+        <p><a href="index.html">Books</a> | 
+            <a href="customers.html">Customers</a> | 
+            <a href="orders.html">Orders</a> | 
+            <a href="authors.html">Authors</a> | 
+            <a href="publishers.html">Publishers</a></p>
+    </div>
+
+    <h2>Orders</h2>
+
+    <div id="browse">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td align="right">1</td>
+                <td align="right">1</td>
+                <td>2025-02-01</td>
+                <td>29.98</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">2</td>
+                <td align="right">2</td>
+                <td>2025-02-02</td>
+                <td>15.99</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">3</td>
+                <td align="right">3</td>
+                <td>2025-02-03</td>
+                <td>29.97</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="#" onClick="showform('insert')">Add New Order</a></p>
+    </div>
+
+    <!-- Insert New Order -->
+    <div id="insert" style="display:none">
+        <form method="POST" id="addOrder">
+            <legend><strong>Add Order</strong></legend>
+            <label>Customer ID:</label> <input type="text" name="customer_id" required /><br><br>
+            <label>Order Date:</label> <input type="date" name="order_date" required /><br><br>
+            <label>Total Amount:</label> <input type="text" name="total_amount" required /><br><br>
+            <input class="btn" type="submit" value="Add Order" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Update Order -->
+    <div id="update" style="display:none">
+        <form method="POST" id="updateOrder">
+            <legend><strong>Update Order</strong></legend>
+            <input type="hidden" name="orderID" value="1">
+            <label>Customer ID:</label> <input type="text" name="customer_id" value="1" /><br><br>
+            <label>Order Date:</label> <input type="date" name="order_date" value="2025-02-01" /><br><br>
+            <label>Total Amount:</label> <input type="text" name="total_amount" value="29.98" /><br><br>
+            <input class="btn" type="submit" value="Save Update" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Delete Order -->
+    <div id="delete" style="display:none">
+        <form method="POST" id="deleteOrder">
+            <legend><strong>Delete Order</strong></legend>
+            <p>Are you sure you want to delete the following order?</p>
+            <input type="hidden" name="orderID" value="1">
+            <label>Customer ID:</label> 1<br><br>
+            <label>Order Date:</label> 2025-02-01<br><br>
+            <label>Total Amount:</label> 29.98<br><br>
+            <input class="btn" type="submit" value="Delete Order" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+</body>
+</html>

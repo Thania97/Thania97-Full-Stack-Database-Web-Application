@@ -1,0 +1,141 @@
+ <!-- 
+  Citation for the following HTML document
+        Date: 02/12/2025
+        Adapted from bsg_HTML_UI example documents:
+        Source URL: https://canvas.oregonstate.edu/courses/1987790/pages/exploration-web-application-technology?module_item_id=25023012
+    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publishers Management</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="styles.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { // default to browse view
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body onload="showform('browse')">
+    <h1>Publishers Management</h1>
+
+    <div id="navigation">
+        <p><a href="index.html">Books</a> | 
+            <a href="customers.html">Customers</a> | 
+            <a href="orders.html">Orders</a> | 
+            <a href="authors.html">Authors</a> | 
+            <a href="publishers.html">Publishers</a></p>
+    </div>
+
+    <h2>Publishers</h2>
+    
+
+    <div id="browse">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td align="right">1</td>
+                <td>Harper Voyager</td>
+                <td>704 Findley Avenue, New York, USA</td>
+                <td>111-222-3333</td>
+                <td>info@harpervoyager.com</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">2</td>
+                <td>Secker & Warburg</td>
+                <td>4006 Pringle Drive, London, UK</td>
+                <td>222-111-3333</td>
+                <td>info@seckerwarburg.com</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">3</td>
+                <td>Laboratory</td>
+                <td>3362 Clark Street, London, UK</td>
+                <td>333-2222-1111</td>
+                <td>info@laboratory.com</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="#" onClick="showform('insert')">Add New Publisher</a></p>
+    </div>
+
+    <!-- Insert New Publisher -->
+    <div id="insert" style="display:none">
+        <form method="POST" id="addPublisher">
+            <legend><strong>Add Publisher</strong></legend>
+            <label>Name:</label> <input type="text" name="name" required /><br><br>
+            <label>Address:</label> <input type="text" name="address" required /><br><br>
+            <label>Phone Number:</label> <input type="text" name="phone_number" required /><br><br>
+            <label>Email:</label> <input type="email" name="email" required /><br><br>
+            <input class="btn" type="submit" value="Add Publisher" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Update Publisher -->
+    <div id="update" style="display:none">
+        <form method="POST" id="updatePublisher">
+            <legend><strong>Update Publisher</strong></legend>
+            <input type="hidden" name="publisherID" value="1">
+            <label>Name:</label> <input type="text" name="name" value="Harper Voyager" /><br><br>
+            <label>Address:</label> <input type="text" name="address" value="704 Findley Avenue, New York, USA" /><br><br>
+            <label>Phone Number:</label> <input type="text" name="phone_number" value="111-222-3333" /><br><br>
+            <label>Email:</label> <input type="email" name="email" value="info@harpervoyager.com" /><br><br>
+            <input class="btn" type="submit" value="Save Update" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Delete Publisher -->
+    <div id="delete" style="display:none">
+        <form method="POST" id="deletePublisher">
+            <legend><strong>Delete Publisher</strong></legend>
+            <p>Are you sure you want to delete the following publisher?</p>
+            <input type="hidden" name="publisherID" value="1">
+            <label>Name:</label> Harper Voyager<br><br>
+            <input class="btn" type="submit" value="Delete Publisher" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+</body>
+</html>

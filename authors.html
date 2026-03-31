@@ -1,0 +1,137 @@
+ <!-- 
+  Citation for the following HTML document
+        Date: 02/12/2025
+        Adapted from bsg_HTML_UI example documents:
+        Source URL: https://canvas.oregonstate.edu/courses/1987790/pages/exploration-web-application-technology?module_item_id=25023012
+    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors Management</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="styles.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            // default to browse view
+            else { 
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body onload="showform('browse')">
+    <h1>Authors Management</h1>
+
+    <div id="navigation">
+        <p><a href="index.html">Books</a> | 
+          <a href="customers.html">Customers</a> | 
+          <a href="orders.html">Orders</a> | 
+          <a href="authors.html">Authors</a> | 
+          <a href="publishers.html">Publishers</a></p>
+    </div>
+
+    <h2>Authors</h2>
+
+    <div id="browse">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td align="right">1</td>
+                <td>Rebecca F.</td>
+                <td>Kuang</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onClick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">2</td>
+                <td>George</td>
+                <td>Orwell</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onClick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">3</td>
+                <td>J.R.R.</td>
+                <td>Tolkien</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onClick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">4</td>
+                <td>Anita</td>
+                <td>Lovecraft</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onClick="showform('delete')">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="#" onClick="showform('insert')">Add New Author</a></p>
+    </div>
+
+    <!-- Insert New Author -->
+    <div id="insert" style= "display:none">
+        <form method="POST" id= "addAuthor">
+            <legend><strong>Add Author</strong></legend>
+            <label>First Name:</label> <input type="text" name="first_name" required /><br><br>
+            <label>Last Name:</label> <input type="text" name="last_name" required /><br><br>
+            <input class="btn" type="submit" value="Add Author" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Update Author -->
+    <div id="update" style="display:none">
+        <form method="POST" id= "updateAuthor">
+            <legend><strong>Update Author</strong></legend>
+            <input type="hidden" name="authorID" value="1">
+            <label>First Name:</label> <input type="text" name="first_name" value="Rebecca F." /><br><br>
+            <label>Last Name:</label> <input type="text" name="last_name" value="Kuang" /><br><br>
+            <input class="btn" type="submit" value="Save Update" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Delete Author -->
+    <div id="delete" style="display:none"> // do not display by default
+        <form method="POST" id="deleteAuthor">
+            <legend><strong>Delete Author</strong></legend>
+            <p>Are you sure you want to delete the following author?</p>
+            <input type= "hidden" name="authorID" value="1">
+            <label>First Name:</label> Rebecca F.<br><br>
+            <label>Last Name:</label> Kuang<br><br>
+            <input class="btn" type="submit" value="Delete Author" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+</body>
+</html>

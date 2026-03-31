@@ -1,0 +1,146 @@
+ <!-- 
+  Citation for the following HTML document
+        Date: 02/12/2025
+        Adapted from bsg_HTML_UI example documents:
+        Source URL: https://canvas.oregonstate.edu/courses/1987790/pages/exploration-web-application-technology?module_item_id=25023012
+    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers Management</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="styles.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { // default to browse view
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body onload="showform('browse')">
+    <h1>Customers Management</h1>
+
+    <div id="navigation">
+      <p><a href="index.html">Books</a> | 
+      <a href="customers.html">Customers</a> | 
+      <a href="orders.html">Orders</a> | 
+      <a href="authors.html">Authors</a> | 
+      <a href="publishers.html">Publishers</a></p>
+  </div>
+
+    <h2>Customers</h2>
+
+    <div id="browse">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td align="right">1</td>
+                <td>Chelsey</td>
+                <td>Riddle</td>
+                <td>chelsey.riddle@gmail.com</td>
+                <td>458-000-1111</td>
+                <td>4311 Davis Street, HappyTown, OR, 12345-0000</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">2</td>
+                <td>Aleena</td>
+                <td>Acosta</td>
+                <td>aleena.acosta@gmail.com</td>
+                <td>458-000-1112</td>
+                <td>414 Seneca Drive, SunnyTown, CA, 12346-0000</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+            <tr>
+                <td align="right">3</td>
+                <td>Darius</td>
+                <td>Edwards</td>
+                <td>darius.edwards@gmail.com</td>
+                <td>458-000-1113</td>
+                <td>4058 Buena Vista Avenue, OR, 12347-0000</td>
+                <td><a href="#" onClick="showform('update')">Edit</a></td>
+                <td><a href="#" onclick="showform('delete')">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="#" onClick="showform('insert')">Add New Customer</a></p>
+    </div>
+
+    <!-- Insert New Customer -->
+    <div id="insert" style="display:none">
+        <form method="POST" id="addCustomer">
+            <legend><strong>Add Customer</strong></legend>
+            <label>First Name:</label> <input type="text" name="first_name" required /><br><br>
+            <label>Last Name:</label> <input type="text" name="last_name" required /><br><br>
+            <label>Email:</label> <input type="email" name="email" required /><br><br>
+            <label>Phone Number:</label> <input type="text" name="phone_number" required /><br><br>
+            <label>Address:</label> <textarea name="address" required></textarea><br><br>
+            <input class="btn" type="submit" value="Add Customer" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Update Customer -->
+    <div id="update" style="display:none">
+        <form method="POST" id="updateCustomer">
+            <legend><strong>Update Customer</strong></legend>
+            <input type="hidden" name="customerID" value="1">
+            <label>First Name:</label> <input type="text" name="first_name" value="Chelsey" /><br><br>
+            <label>Last Name:</label> <input type="text" name="last_name" value="Riddle" /><br><br>
+            <label>Email:</label> <input type="email" name="email" value="chelsey.riddle@gmail.com" /><br><br>
+            <label>Phone Number:</label> <input type="text" name="phone_number" value="458-000-1111" /><br><br>
+            <label>Address:</label> <textarea name="address">4311 Davis Street, HappyTown, OR, 12345-0000</textarea><br><br>
+            <input class="btn" type="submit" value="Save Update" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+
+    <!-- Delete Customer -->
+    <div id="delete" style="display:none">
+        <form method="POST" id="deleteCustomer">
+            <legend><strong>Delete Customer</strong></legend>
+            <p>Are you sure you want to delete the following customer?</p>
+            <input type="hidden" name="customerID" value="1">
+            <label>First Name:</label> Chelsey<br><br>
+            <label>Last Name:</label> Riddle<br><br>
+            <input class="btn" type="submit" value="Delete Customer" />
+            <input class="btn" type="button" value="Cancel" onClick="showform('browse')" />
+        </form>
+    </div>
+</body>
+</html>
